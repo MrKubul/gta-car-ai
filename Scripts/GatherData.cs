@@ -13,10 +13,8 @@ public class GatherData : Script
         Tick += OnTick;
         KeyUp += OnKeyUp;
         KeyDown += OnKeyDown;
-        Interval = 45; //interval resulting in 50ms ticks
+        Interval = 45; //interval resulting in 50ms ticks, to try different and acalculate average tick
     }
-
-    //TODO write floats with dots to files 
 
     private void OnTick(object sender, EventArgs e)
     {
@@ -28,8 +26,8 @@ public class GatherData : Script
             Vehicle vehicle = playerPed.CurrentVehicle;
             string timestamp = DateTime.Now.ToString("hh:mm:ss.fff");
 
-            float Sa = vehicle.SteeringAngle; //float in range [-40.0,40.0]
-            float Sp = vehicle.Speed; //float mph speed divided by 2.2
+            float Sa = vehicle.SteeringAngle; //float in range [-40.0,40.0] will be scaled to [0,1]
+            float Sp = vehicle.Speed; //float mph speed divided by 2.2 will be scaled to [0,1]
             float Tr = vehicle.Throttle; //float in range [0,1]
             float Br = vehicle.BrakePower; //float in range [0,1]
 
