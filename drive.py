@@ -25,6 +25,13 @@ j = pyvjoy.VJoyDevice(1)
 
 vjoy_max = 32768
 
+j.data.wAxisX = int(0.5 * vjoy_max)
+j.data.wAxisX = 0
+j.data.wAxisX = 0
+
+j.update()
+
+
 print("starting in 5 seconds")
 time.sleep(2)
 
@@ -35,9 +42,11 @@ while True:
     img = cv2.imread('image.jpg')
     predictions = predict_values(img)
     print(predictions)
-    j.data.wAxisX = vjoy_max//2
-    j.data.wAxisY = vjoy_max//2
+
+    j.data.wAxisZ = int((vjoy_max * ((min(max(predictions[0][0], -0.4), 0.4))/2 + 0.5)))
+    j.data.wAxisY = 12000
     j.update()
-    time.sleep(0.1)
+
+    time.sleep(0.05)
     if keyboard.is_pressed('q'):
         break

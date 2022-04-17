@@ -2,9 +2,9 @@ import pandas as pd
 import os
 
 
-path = r"C:\Users\kubad\Desktop\Data_1\balanced_data2.csv"
-origin_path = r'C:\Users\kubad\Desktop\Data_1'
-final_path = r'C:\Users\kubad\Desktop\images_balanced'
+path = r"C:\Users"
+origin_path = r'C:\Users'
+final_path = r'C:\Users'
 
 df = pd.read_csv(path, sep=';')
 df = df.reset_index()

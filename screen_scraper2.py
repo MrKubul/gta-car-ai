@@ -17,7 +17,7 @@ def grab_screen(region_1, region_2, file_name):
     cv2.imwrite(path+"\\" + folder +"\\"+file_name + "_edge.png", open_cv_image)
 
 
-path = r"C:\Users\kubad\Desktop\gta-car-ai\VPilot\Dataset"
+path = r"C:\Users"
 
 image_to_collect = 1500
 id_number = 1
