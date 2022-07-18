@@ -1,3 +1,6 @@
+### File with code from model training on google collab
+
+import unzip as unzip
 from google.colab import drive
 drive.mount('/content/drive')
 

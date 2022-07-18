@@ -1,3 +1,5 @@
+### File with code from transfer learning model training on google collab
+
 !pip install -U efficientnet
 
 import efficientnet.keras as efn

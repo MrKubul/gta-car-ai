@@ -3,8 +3,7 @@ import keyboard as keyboard
 import numpy as np
 import pyautogui
 import time
-import datetime
-from model import *
+from Model.model import predict_values
 import pyvjoy
 
 def grab_screen(region_2):

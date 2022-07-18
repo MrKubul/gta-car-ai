@@ -7,14 +7,14 @@ import datetime
 
 
 def grab_screen(region_1, region_2, file_name):
-    #im = pyautogui.screenshot(path + "\\" + folder + "\\"+file_name + "_depth.png", region=region_1)   depth capture
-    im = pyautogui.screenshot(region=region_2)     #normal capture
+    # im = pyautogui.screenshot(path + "\\" + folder + "\\"+ file_name + "_depth.png", region=region_1)  #optional depth
+    im = pyautogui.screenshot(region=region_2)  # normal image capture
     open_cv_image = np.array(im)
     open_cv_image = open_cv_image[:, :, ::-1].copy()
     open_cv_image = cv2.cvtColor(open_cv_image, cv2.COLOR_BGR2GRAY)
     open_cv_image = cv2.GaussianBlur(open_cv_image, (3, 3), 0)
     open_cv_image = cv2.Canny(open_cv_image, edge_threshold_min, edge_threshold_max)
-    cv2.imwrite(path+"\\" + folder +"\\"+file_name + "_edge.png", open_cv_image)
+    cv2.imwrite(path + "\\" + folder + "\\" + file_name + "_edge.png", open_cv_image)
 
 
 path = r"C:\Users"
@@ -43,9 +43,7 @@ while id_number <= image_to_collect:
     if keyboard.is_pressed('q'):  # if key 'q' is pressed
         break
     try:
-        time.sleep(0.09-(time.time() - start))
+        time.sleep(0.09 - (time.time() - start))
     except:
         pass
-    print(id_number-1)
-
-
+    print(id_number - 1)

@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-
+image_num = 37160
 path = r"C:\Users"
 origin_path = r'C:\Users'
 final_path = r'C:\Users'
@@ -14,7 +14,7 @@ for index, row in df.iterrows():
     print(int(row['ID']))
     images.append(int(row['ID']))
 
-for i in range(37160):
+for i in range(image_num):
     if i not in images:
         for y in sorted(os.listdir(origin_path)):
             if y.startswith(str(i)+'_'):
