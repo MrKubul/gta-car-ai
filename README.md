@@ -1,6 +1,17 @@
 # gta-car-ai, fully autonomous driving model
 
-![Alt text](https://github.com/MrKubul/gta-car-ai/blob/main/Asset/car.png)
+Project is deeply inspired by a [video](https://www.youtube.com/watch?v=KSX2psajYrg&list=PLQVvvaa0QuDeETZEOy4VdocT7TOjfSA8a&index=14&ab_channel=sentdex) created by [Sentdex](https://www.youtube.com/c/sentdex) i found on YouTube long time ago. I was curious if i can achieve some decent result by myself.
+
+## Instructions
+
+```
+drive.py
+```
+It's main script, run it to start collecting data and send predictions to virtual joystick. It takes screenshots of your game window and processes them like it is shown on the picture:
+
+
+![Alt text](https://github.com/MrKubul/gta-car-ai/blob/main/Assets/car.png)
+
 ## Model v1.0
 Data consists mainly highways, roads are empty and speed is stable value. Main goal for model is to keep car beetween lines, and turn when needed. Thats first implementation and dataset is fairly small.
 
@@ -10,3 +21,4 @@ Model performs ok. It clearly got some intuition about roadlines and can drive e
 
 ## Model v2.0(work in progress..)
 Much bigger model, trained on full images of road.
+Full PDF file documenting process of development is comming soon.
