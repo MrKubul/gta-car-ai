@@ -1,0 +1,11 @@
+Path to save collected images:
+# PATH TO DATASET DIR
+
+Total number of images to be collected (int):
+# E.g. 10000
+
+Place on the screen to grab images from (tuple):
+# E.g. 360,480
+
+Time between collecting two data points in seconds (float):
+# E.g. 0.1
