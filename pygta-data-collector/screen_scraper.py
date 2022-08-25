@@ -1,4 +1,4 @@
-from inspect import _void
+import PIL
 import cv2
 import keyboard as keyboard
 import numpy as np
@@ -7,6 +7,8 @@ import time
 import datetime
 import typing
 import os, os.path
+
+# rewite to underscore_style
 
 class ScreenScrapper:
     def __init__(self) -> None:
@@ -23,30 +25,38 @@ class ScreenScrapper:
     def countFilesInDir(self) -> int:
         return len([name for name in os.listdir(self.datasetPath) if os.path.isfile(os.path.join(self.datasetPath, name))])
 
-    def grab_screen_pyauto(self, file_name) -> None:
-        # im = pyautogui.screenshot(path + "\\" + folder + "\\"+ file_name + "_depth.png", region=region_1)  #optional depth
-        im = pyautogui.screenshot(region=self.grabRegion)
-        open_cv_image = np.array(im)
+    def grab_screen_pyauto(self, file_name, canny_settings) -> None:
+        im: PIL.Image = pyautogui.screenshot(region=self.grabRegion)
+        open_cv_image: np.array = np.array(im)
         open_cv_image = open_cv_image[:, :, ::-1].copy()
         open_cv_image = cv2.cvtColor(open_cv_image, cv2.COLOR_BGR2GRAY)
         open_cv_image = cv2.GaussianBlur(open_cv_image, (3, 3), 0)
-        open_cv_image = cv2.Canny(open_cv_image, edge_threshold_min, edge_threshold_max)
-        cv2.imwrite(path + "\\" + folder + "\\" + file_name + "_edge.png", open_cv_image)
+        open_cv_image = cv2.Canny(open_cv_image, canny_settings[0], canny_settings[1])
+        cv2.imwrite(self.datasetPath + "\\" + file_name + ".png", open_cv_image)
     
-    def grab_screen_other(self, file_name) -> None:
-        # im = pyautogui.screenshot(path + "\\" + folder + "\\"+ file_name + "_depth.png", region=region_1)  #optional depth
-        im = pyautogui.screenshot(region=region_2)
-        open_cv_image = np.array(im)
+    def grab_screen_pil(self, file_name, canny_settings) -> None:
+        im: PIL.Image = pyautogui.screenshot(region=self.grabRegion)
+        open_cv_image: np.array = np.array(im)
         open_cv_image = open_cv_image[:, :, ::-1].copy()
         open_cv_image = cv2.cvtColor(open_cv_image, cv2.COLOR_BGR2GRAY)
         open_cv_image = cv2.GaussianBlur(open_cv_image, (3, 3), 0)
-        open_cv_image = cv2.Canny(open_cv_image, edge_threshold_min, edge_threshold_max)
-        cv2.imwrite(path + "\\" + folder + "\\" + file_name + "_edge.png", open_cv_image)
+        open_cv_image = cv2.Canny(open_cv_image, canny_settings[0], canny_settings[1])
+        cv2.imwrite(self.datasetPath + "\\" + file_name + ".png", open_cv_image)
+
+    def grab_screen_mss(self, file_name, canny_settings) -> None:
+        im: PIL.Image = pyautogui.screenshot(region=self.grabRegion)
+        open_cv_image: np.array = np.array(im)
+        open_cv_image = open_cv_image[:, :, ::-1].copy()
+        open_cv_image = cv2.cvtColor(open_cv_image, cv2.COLOR_BGR2GRAY)
+        open_cv_image = cv2.GaussianBlur(open_cv_image, (3, 3), 0)
+        open_cv_image = cv2.Canny(open_cv_image, canny_settings[0], canny_settings[1])
+        cv2.imwrite(self.datasetPath + "\\" + file_name + ".png", open_cv_image)
     
 
     def collect(self) -> None:
         edge_threshold_min: int = 50
         edge_threshold_max: int = 220
+        canny_settings = (edge_threshold_min, edge_threshold_max)
         region = (128, 450, 384, 256)     # input from user
         currentDatasetSize = self.countFilesInDir() # read from user
         pyautogui.PAUSE = 0
@@ -64,12 +74,12 @@ class ScreenScrapper:
             start: float = time.time()
             pyautogui.press('num1')     # signal for game to collect vehicle data
             file_id: str = str(currentDatasetSize) + '_' + datetime.datetime.now().strftime('%H;%M;%S.%f')[:-3]
-            self.grab_screen(region, file_id)
+            self.grab_screen_pyauto(region, file_id, canny_settings)
             currentDatasetSize += 1
             if keyboard.is_pressed('q'):
                 break
             try:
-                time.sleep(0.1 - (time.time() - start))
+                time.sleep(self.timeInterval - (time.time() - start))
             except:
                 pass
 
