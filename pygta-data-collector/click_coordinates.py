@@ -1,7 +1,5 @@
 import cv2
 import pyautogui
-import time
-import matplotlib.pyplot as plt
 
 
 def click_event(event, x, y, flags, params):
