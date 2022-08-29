@@ -1,11 +1,14 @@
 Path to save collected images:
-# PATH TO DATASET DIR
+_
 
 Total number of images to be collected (int):
-# E.g. 10000
-
-Place on the screen to grab images from (tuple):
-# E.g. 360,480
+10000
 
 Time between collecting two data points in seconds (float):
-# E.g. 0.1
+0.2
+
+Key to call the game data collection script, allowed are numlock, num0, pagedown:
+num0
+
+Region of screen to grab images from (if its empty leave it like it):
+_

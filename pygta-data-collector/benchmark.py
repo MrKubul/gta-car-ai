@@ -19,7 +19,7 @@ TESTPATH = r'path'
 def test_pil():
     start: float = time.time()
     for i in range(1000):
-        im: Image = ImageGrab.grab()
+        im = ImageGrab.grab()
         open_cv_image: np.array = np.array(im)
         cv2.imwrite(TESTPATH + "\\" + str(i) + ".png", open_cv_image)
     print("Result for pil: ", time.time() - start)
@@ -46,7 +46,7 @@ def test_pyauto():
 
 def run_benchmark():
     test_mss()
-    test_pil()L()
+    test_pil()
     test_pyauto()
 
 
